@@ -87,12 +87,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
     }
   }
   network_interface {
-    name                      = "${module.labels.id}-nic"
+    name                      = var.resource_position_prefix ? format("nic-%s", local.name) : format("%s-nic", local.name)
     primary                   = true
     dns_servers               = var.dns_servers
     network_security_group_id = var.network_security_group_id
     ip_configuration {
-      name                                         = "${module.labels.id}-ip-config"
+
+      name                                         = var.resource_position_prefix ? format("ip-config-%s", local.name) : format("%s-ip-config", local.name)
       primary                                      = true
       subnet_id                                    = var.subnet_id
       application_gateway_backend_address_pool_ids = var.application_gateway_backend_address_pool_ids
