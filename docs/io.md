@@ -2,7 +2,6 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| accelerated\_networking | Enable accelerated networking for the network interfaces. | `bool` | `false` | no |
 | admin\_password | The administrator password for the virtual machines. Required if disable\_password\_authentication is false. | `string` | `null` | no |
 | admin\_username | The administrator username for the virtual machines. | `string` | `"ubuntu"` | no |
 | application\_gateway\_backend\_address\_pool\_ids | A list of backend address pool IDs from an Application Gateway to associate with the VMSS. | `list(string)` | `[]` | no |
@@ -28,7 +27,6 @@
 | health\_probe\_id | The ID of a Load Balancer health probe to use for health checks. | `string` | `null` | no |
 | identity | Managed identity configuration for the scale set. | <pre>object({<br>    type         = string<br>    identity_ids = list(string)<br>  })</pre> | `null` | no |
 | instances\_count | The number of instances to create in the Virtual Machine Scale Set. | `number` | `1` | no |
-| ip\_forwarding\_enabled | Enable IP forwarding on the network interfaces. | `bool` | `false` | no |
 | label\_order | The order of labels used to construct resource names or tags. | `list(string)` | <pre>[<br>  "name",<br>  "environment",<br>  "location"<br>]</pre> | no |
 | load\_balancer\_backend\_address\_pool\_ids | A list of backend address pool IDs from a Load Balancer to associate with the VMSS. | `list(string)` | `[]` | no |
 | load\_balancer\_inbound\_nat\_rules\_ids | A list of inbound NAT rule IDs from a Load Balancer to associate with the VMSS. | `list(string)` | `[]` | no |
