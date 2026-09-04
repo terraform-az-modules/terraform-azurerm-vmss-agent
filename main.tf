@@ -87,14 +87,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
     }
   }
   network_interface {
-    name                          = "${module.labels.id}-nic"
-    primary                       = true
-    dns_servers                   = var.dns_servers
-    enable_ip_forwarding          = var.ip_forwarding_enabled
-    enable_accelerated_networking = var.accelerated_networking
-    network_security_group_id     = var.network_security_group_id
+    name                      = var.resource_position_prefix ? format("nic-%s", local.name) : format("%s-nic", local.name)
+    primary                   = true
+    dns_servers               = var.dns_servers
+    network_security_group_id = var.network_security_group_id
     ip_configuration {
-      name                                         = "${module.labels.id}-ip-config"
+
+      name                                         = var.resource_position_prefix ? format("ip-config-%s", local.name) : format("%s-ip-config", local.name)
       primary                                      = true
       subnet_id                                    = var.subnet_id
       application_gateway_backend_address_pool_ids = var.application_gateway_backend_address_pool_ids
@@ -106,8 +105,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
   dynamic "automatic_os_upgrade_policy" {
     for_each = var.upgrade_mode == "Automatic" ? ["enabled"] : []
     content {
-      disable_automatic_rollback  = var.disable_automatic_rollback
-      enable_automatic_os_upgrade = var.automatic_os_upgrade
+      automatic_os_upgrade_enabled = var.automatic_os_upgrade
+      automatic_rollback_enabled   = var.disable_automatic_rollback
     }
   }
   dynamic "automatic_instance_repair" {

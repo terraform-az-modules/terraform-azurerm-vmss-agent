@@ -251,18 +251,6 @@ variable "dns_servers" {
   description = "A list of DNS servers to use for the network interfaces."
 }
 
-variable "accelerated_networking" {
-  type        = bool
-  default     = false
-  description = "Enable accelerated networking for the network interfaces."
-}
-
-variable "ip_forwarding_enabled" {
-  type        = bool
-  default     = false
-  description = "Enable IP forwarding on the network interfaces."
-}
-
 variable "load_balancer_backend_address_pool_ids" {
   type        = list(string)
   default     = []
